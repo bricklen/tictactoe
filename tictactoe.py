@@ -12,7 +12,8 @@ import os
 #   * Switch turns and prompt for the other user after each user has played.
 #   * Once the first X or O is played, it will be associated with that player for the duration of the game.
 #   * Add validation so that the players cannot play the other letter.
-#   * Add option to replay.
+#   * Add option to replay the game.
+#   # Animate the "You Win!" text
 
 # Initial board
 board = {'1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9'}
