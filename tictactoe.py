@@ -4,6 +4,8 @@ Tic Tac Toe for two players.
 • 2 players should be able to play the game (both sitting at the same computer)
 • The board should be printed out every time a player makes a move
 • You should be able to accept input of the player position and then place a symbol on the board.
+
+It has been suggested that this be renamed to 'bricktactoe'...
 """
 import os
 
@@ -17,10 +19,10 @@ import os
 
 # Initial board
 board = {'1':'1','2':'2','3':'3','4':'4','5':'5','6':'6','7':'7','8':'8','9':'9'}
-greyon = "\033[0;90m"
-greyoff = "\033[0m"
-coloron = "\033[0;33m"
-coloroff = "\033[0m"
+GREYON = "\033[0;90m"
+GREYOFF = "\033[0m"
+COLORON = "\033[0;33m"
+COLOROFF = "\033[0m"
 
 def main():
     get_input(True)
@@ -29,11 +31,11 @@ def print_board():
     # Clear the screen before each turn.
     absolutely_unused_variable = os.system("clear") # This variable gets the output from the clear command, else it would print to screen.
     print ('+---+---+---+')
-    print ('| {r1} | {r2} | {r3} |'.format(r1=greyon+board['1']+greyoff,r2=greyon+board['2']+greyoff,r3=greyon+board['3']+greyoff))
+    print ('| {r1} | {r2} | {r3} |'.format(r1=GREYON+board['1']+GREYOFF,r2=GREYON+board['2']+GREYOFF,r3=GREYON+board['3']+GREYOFF))
     print ('+---+---+---+')
-    print ('| {r1} | {r2} | {r3} |'.format(r1=greyon+board['4']+greyoff,r2=greyon+board['5']+greyoff,r3=greyon+board['6']+greyoff))
+    print ('| {r1} | {r2} | {r3} |'.format(r1=GREYON+board['4']+GREYOFF,r2=GREYON+board['5']+GREYOFF,r3=GREYON+board['6']+GREYOFF))
     print ('+---+---+---+')
-    print ('| {r1} | {r2} | {r3} |'.format(r1=greyon+board['7']+greyoff,r2=greyon+board['8']+greyoff,r3=greyon+board['9']+greyoff))
+    print ('| {r1} | {r2} | {r3} |'.format(r1=GREYON+board['7']+GREYOFF,r2=GREYON+board['8']+GREYOFF,r3=GREYON+board['9']+GREYOFF))
     print ('+---+---+---+')
     print ('\nEnter q to exit')
 
@@ -46,13 +48,13 @@ def help():
 
 def strip_chars(st):
     # Remove the colourizing chars
-    stripped_val = st.replace(coloron,'')
-    stripped_val = stripped_val.replace(coloroff,'')
+    stripped_val = st.replace(COLORON,'')
+    stripped_val = stripped_val.replace(COLOROFF,'')
     return stripped_val
 
 def check_for_win(loc, x_or_o):
     # Add the colour changes to the character so a simple string comparison succeeds.
-    x_or_o = coloron + x_or_o + coloroff
+    x_or_o = COLORON + x_or_o + COLOROFF
     # Check for winning combination
     if (board['1'] == x_or_o and board['2'] == x_or_o and board['3'] == x_or_o) or \
         (board['4'] == x_or_o and board['5'] == x_or_o and board['6'] == x_or_o) or \
@@ -125,7 +127,7 @@ def get_input(first_time):
 
         # With the introduction of coloured text, the comparison
         # needs to be against the stripped cell value.
-        cur_val = coloron + board[loc] + coloroff
+        cur_val = COLORON + board[loc] + COLOROFF
         stripped_val = strip_chars(cur_val)
 
         if stripped_val in 'XO':
@@ -139,7 +141,7 @@ def get_input(first_time):
 def update_board(loc, x_or_o):
     # Update the correct dict value
     global board
-    board[loc] = coloron + x_or_o + coloroff
+    board[loc] = COLORON + x_or_o + COLOROFF
     # Print the board with the new values
     print_board()
     check_for_win(loc, x_or_o)
